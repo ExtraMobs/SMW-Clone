@@ -35,6 +35,7 @@ public partial class Character : Node2D
     {
         PreProcessInput();
         state.Process(velocity);
+        animatedSpriteNode.SpeedScale = (float)(DefaultValues.fpsFactor / (velocity.max.X / Math.Abs(velocity.value.X)));
         Position += velocity.value * (float)delta;
     }
 
@@ -81,9 +82,6 @@ public partial class Character : Node2D
                 animatedSpriteNode.FlipH = true;
                 break;
         }
-			// animatedSpriteNode.Play("walk");
-			// animatedSpriteNode.Play("walk");
-			// animatedSpriteNode.Play("idle");
     }
 
     class Walk : CharacterState
@@ -99,8 +97,9 @@ public partial class Character : Node2D
                 velocity.ApplyResistance(accel);
                 return;
             }
-            
+
             base.Process(velocity);
+            
         }
     }
 
@@ -112,7 +111,7 @@ class CharacterState
     public Acceleration accel;
 
     public CharacterState(){
-        this.accel = new Acceleration();
+        accel = new Acceleration();
     }
     public CharacterState(Acceleration accel)
     {
