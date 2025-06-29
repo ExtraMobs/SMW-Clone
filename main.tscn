@@ -1,0 +1,109 @@
+[gd_scene load_steps=12 format=3 uid="uid://cjdg7vhkc56qa"]
+
+[ext_resource type="Texture2D" uid="uid://camq7k8feu4t4" path="res://Sprites/Background/Yoshi's House.png" id="1_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://8dv8swgqkfsc" path="res://berries.tscn" id="2_272bh"]
+[ext_resource type="SpriteFrames" uid="uid://be6mm2gtr6wtr" path="res://GameObject/Scenario/berries-red.tres" id="2_lquwl"]
+[ext_resource type="Script" uid="uid://cp03hro7k3myc" path="res://GameObject/Scenario/Berry.cs" id="4_272bh"]
+[ext_resource type="Texture2D" uid="uid://5o8443or2qlx" path="res://Sprites/Scenario/yoshi-fireplace.png" id="5_7mycd"]
+[ext_resource type="PackedScene" uid="uid://8fa7m3pdagbd" path="res://GameObject/Character/character.tscn" id="5_lquwl"]
+[ext_resource type="Script" uid="uid://bvnv4d2qam6tj" path="res://GameObject/SNESAnimatedSprite.cs" id="6_272bh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(256, 47)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_272bh"]
+atlas = ExtResource("5_7mycd")
+region = Rect2(0, 0, 8, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5vw27"]
+atlas = ExtResource("5_7mycd")
+region = Rect2(8, 0, 8, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kek77"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_272bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5vw27")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Scenario" type="Sprite2D" parent="Background"]
+position = Vector2(128, 23)
+texture = ExtResource("1_1bvp3")
+
+[node name="Berries" parent="Background/Scenario" instance=ExtResource("2_272bh")]
+
+[node name="0" type="AnimatedSprite2D" parent="Background/Scenario/Berries"]
+position = Vector2(-88, 48)
+sprite_frames = ExtResource("2_lquwl")
+animation = &"idle"
+script = ExtResource("4_272bh")
+metadata/_custom_type_script = "uid://cp03hro7k3myc"
+
+[node name="1" type="AnimatedSprite2D" parent="Background/Scenario/Berries"]
+position = Vector2(-72, 64)
+sprite_frames = ExtResource("2_lquwl")
+animation = &"idle"
+script = ExtResource("4_272bh")
+metadata/_custom_type_script = "uid://cp03hro7k3myc"
+
+[node name="2" type="AnimatedSprite2D" parent="Background/Scenario/Berries"]
+position = Vector2(-24, 48)
+sprite_frames = ExtResource("2_lquwl")
+animation = &"idle"
+script = ExtResource("4_272bh")
+metadata/_custom_type_script = "uid://cp03hro7k3myc"
+
+[node name="3" type="AnimatedSprite2D" parent="Background/Scenario/Berries"]
+position = Vector2(-8, 80)
+sprite_frames = ExtResource("2_lquwl")
+animation = &"idle"
+script = ExtResource("4_272bh")
+metadata/_custom_type_script = "uid://cp03hro7k3myc"
+
+[node name="4" type="AnimatedSprite2D" parent="Background/Scenario/Berries"]
+position = Vector2(24, 64)
+sprite_frames = ExtResource("2_lquwl")
+animation = &"idle"
+script = ExtResource("4_272bh")
+metadata/_custom_type_script = "uid://cp03hro7k3myc"
+
+[node name="5" type="AnimatedSprite2D" parent="Background/Scenario/Berries"]
+position = Vector2(56, 48)
+sprite_frames = ExtResource("2_lquwl")
+animation = &"idle"
+script = ExtResource("4_272bh")
+metadata/_custom_type_script = "uid://cp03hro7k3myc"
+
+[node name="6" type="AnimatedSprite2D" parent="Background/Scenario/Berries"]
+position = Vector2(88, 64)
+sprite_frames = ExtResource("2_lquwl")
+animation = &"idle"
+script = ExtResource("4_272bh")
+metadata/_custom_type_script = "uid://cp03hro7k3myc"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Background/Scenario"]
+position = Vector2(-128, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Scenario/StaticBody2D"]
+position = Vector2(128, 232)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Fireplace" type="AnimatedSprite2D" parent="Background/Scenario"]
+position = Vector2(63, 160)
+sprite_frames = SubResource("SpriteFrames_kek77")
+autoplay = "default"
+script = ExtResource("6_272bh")
+metadata/_custom_type_script = "uid://bvnv4d2qam6tj"
+
+[node name="Character" parent="." instance=ExtResource("5_lquwl")]

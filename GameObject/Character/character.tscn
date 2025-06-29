@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://8fa7m3pdagbd"]
+
+[ext_resource type="Script" uid="uid://dyhyerw2nlt5e" path="res://GameObject/Character/Character.cs" id="1_8c46f"]
+[ext_resource type="Texture2D" uid="uid://c5l0vrlhh62e2" path="res://Sprites/Characters/mario.png" id="2_8c46f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40l82"]
+atlas = ExtResource("2_8c46f")
+region = Rect2(0, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpem5"]
+atlas = ExtResource("2_8c46f")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw0ju"]
+atlas = ExtResource("2_8c46f")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lmlh"]
+atlas = ExtResource("2_8c46f")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5m5r"]
+atlas = ExtResource("2_8c46f")
+region = Rect2(0, 144, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qy2oj"]
+atlas = ExtResource("2_8c46f")
+region = Rect2(48, 144, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5vw27"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40l82")
+}],
+"loop": false,
+"name": &"duck",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bpem5")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw0ju")
+}],
+"loop": false,
+"name": &"look up",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lmlh")
+}],
+"loop": false,
+"name": &"skid",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5m5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qy2oj")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(14, 20)
+
+[node name="Character" type="Node2D" node_paths=PackedStringArray("animatedSpriteNode")]
+script = ExtResource("1_8c46f")
+animatedSpriteNode = NodePath("RigidBody2d/AnimatedSprite2D")
+
+[node name="RigidBody2d" type="RigidBody2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2d"]
+sprite_frames = SubResource("SpriteFrames_5vw27")
+animation = &"walk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2d"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_h2yge")
